@@ -64,15 +64,13 @@ cat <<__EOF__  >> /etc/skel/.emacs
 __EOF__
 
 
+# Pythonic .vimrc
 cat <<__EOF__ >> /etc/skel/.vimrc
 
 syntax on
 set background=dark
 let loaded_matchparen = 1
-
-; Python-happy
 :set ts=8 et sw=4 sts=4
-
 set foldmethod=indent
 set foldlevel=99
 
