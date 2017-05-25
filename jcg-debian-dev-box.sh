@@ -27,9 +27,12 @@ apt-get ${APTOPT} install \
     vim \
     wget curl \
 
+apt-get ${APTOPT} autoremove
+
 curl -s 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
 
 updatedb
+
 
 echo '
 export PATH=$PATH:/usr/local/go/bin
