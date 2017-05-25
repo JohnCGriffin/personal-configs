@@ -35,4 +35,6 @@ updatedb
 
 echo '
 export PATH=$PATH:/usr/local/go/bin
-' >> /etc/profile.d/path.s
+' >> /etc/profile.d/path.sh
+
+
