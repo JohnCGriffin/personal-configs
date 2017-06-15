@@ -6,15 +6,15 @@
 
 (let ((class '((class color) (min-colors 89))))
   (custom-theme-set-faces
-  
+
    'donkey
-   
+
    `(default ((,class (:foreground "#AEBABA" :background "#0E0E0E"))))
    `(cursor ((,class (:background "thistle"))))
    `(error ((,class (:foreground "salmon1"))))
    `(warning ((,class (:foreground "orange"))))
    `(success ((,class (:foreground "yellow green"))))
-   
+
    ;; Compilation faces
    `(compilation-mode-line-fail ((,class (:foreground "dark green"))))
    `(compilation-mode-line-run  ((,class (:foreground "dark goldenrod"))))
@@ -35,11 +35,10 @@
    `(font-lock-builtin-face ((,class (:foreground "#759ECE"))))
    `(font-lock-comment-face ((,class (:foreground "#3D3D31"))))
    `(font-lock-constant-face ((,class (:foreground "turquoise"))))
-
    `(font-lock-function-name-face ((,class (:foreground "#45A174"))))
    `(font-lock-keyword-face ((,class (:foreground "#759ECE"))))
    `(font-lock-string-face ((,class (:foreground "#BBBA91"))))
-   `(font-lock-type-face ((,class (:foreground "aquamarine"))))
+   `(font-lock-type-face ((,class (:foreground "#59B394")))) ;7/8 of mediumturquoise
    `(font-lock-variable-name-face ((,class (:foreground "yellow green"))))
 
    ;; Button and link faces
