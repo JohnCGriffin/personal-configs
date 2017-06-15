@@ -1,12 +1,15 @@
 
 
-(progn  ;general
+;; General
+
+(progn
 
   (require 'package)
 
-					; was "http://melpa.milkbox.net/packages/"
+
   (add-to-list 'package-archives
-	       '("melpa" . "http://melpa.org/packages/") t)
+					; was "http://melpa.milkbox.net/packages/"
+	       '("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
   (set-language-environment "UTF-8")
   (set-default-coding-systems 'utf-8)
@@ -25,36 +28,41 @@
 
 
 
-(progn ;Python
+;; Python
+
+(progn
 
   (setq python-shell-interpreter "python3"))
 
 
 
-(progn ; GOLANG mostly from johnsogg.github.io/emacs-golang
+;; GOLANG mostly from johnsogg.github.io/emacs-golang
+
+(progn
 
   ;; Define function to call when go-mode loads
+
   (defun my-go-mode-hook ()
-    (defvar gofmt-command "goimports")                ; gofmt uses invokes goimports
+    (defvar gofmt-command "goimports")               ; gofmt uses invokes goimports
 
     (add-to-list 'load-path "~/.emacs.d/go/")
 
 
-    (add-hook 'before-save-hook 'gofmt-before-save) ; gofmt before every save
+    (add-hook 'before-save-hook 'gofmt-before-save)  ; gofmt before every save
     (setq tab-width 3)
     (set (make-local-variable 'compile-command)
 	 (concat "go build -v "
-		 "&& go test -v -coverprofile=/tmp/coverage.out "
+		 "&& go test -v "
+		 "-coverprofile=/tmp/coverage.out "
 		 "&& go vet"))
 
     (defvar go--coverage-current-file-name "/tmp/coverage.out")
-    (load-library "go-guru")
+
+    ;(load-library "go-guru")
 
     ;; guru settings
     (go-guru-hl-identifier-mode)                    ; highlight identifiers
 
-    (flycheck-mode 1)
-    (auto-complete-mode 1)
 
     ;; Key bindings specific to go-mode
     (local-set-key (kbd "M-.") 'godef-jump)         ; Go to definition
@@ -64,8 +72,14 @@
     (local-set-key (kbd "M-]") 'next-error)         ; Go to next error (or msg)
     (local-set-key (kbd "M-[") 'previous-error)     ; Go to previous error or msg
 
-    ;; Ensure the go specific autocomplete is active in go-mode.
+    ;; Ensure the GO autocomplete in go-mode
     (with-eval-after-load 'go-mode
-      (require 'go-autocomplete)))
+      (require 'go-guru)
+      (require 'go-rename)
+      (require 'go-autocomplete)
+      (flycheck-mode 1)
+      (auto-complete-mode 1)))
 
   (add-hook 'go-mode-hook 'my-go-mode-hook))
+
+
