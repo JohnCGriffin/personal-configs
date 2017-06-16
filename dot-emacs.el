@@ -49,6 +49,9 @@
 (add-hook
  'go-mode-hook ; mostly from johnsogg.github.io/emacs-golang
 
+ ;; Don't forget .emacs.d/go/go-guru.el
+ ;; (set (make-local-variable 'compilation-window-height) 14)
+
  (lambda ()
    (defvar gofmt-command "goimports")               ; gofmt uses invokes goimports
 
@@ -69,6 +72,20 @@
    (go-guru-hl-identifier-mode)                    ; highlight identifiers
 
 
+   ;; This shrinks the go-guru output window to fit buffer
+   (add-hook
+    'compilation-finish-functions
+
+    (lambda (buffer desc)
+
+      (let* ((w-list (get-buffer-window-list buffer))
+	     (w (and (= 1 (length w-list))
+		     (car w-list))))
+	(and w
+	     (progn
+	       (shrink-window-if-larger-than-buffer w)
+	       (set-window-point w 0))))))
+
    ;; Key bindings specific to go-mode
    (local-set-key (kbd "M-.") 'godef-jump)         ; Go to definition
    (local-set-key (kbd "M-*") 'pop-tag-mark)       ; Return from whence you came
@@ -84,6 +101,4 @@
      (require 'go-autocomplete)
      (flycheck-mode 1)
      (auto-complete-mode 1))))
-
-
 
