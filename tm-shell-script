@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# This will likely be: ~/bin/tm
+
+tmux attach || (
+	tmux new-session -d && \
+	tmux send-keys 'clear && echo DO NOT FORGET ^B: for missing status line' C-m
+	tmux set -g status off && \
+	tmux split-window -h -p 40 && 
+	tmux split-window && tmux attach)
