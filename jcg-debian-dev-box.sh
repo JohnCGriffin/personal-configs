@@ -17,7 +17,7 @@ echo debconf debconf/frontend select Noninteractive | debconf-set-selections
 apt-get ${APTOPT} install \
 	build-essential \
 	cmake \
-	emacs25-nox \
+	emacs24-nox \
 	git \
 	htop \
 	less \
@@ -34,7 +34,7 @@ updatedb
 
 curl -s 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
 
-THEMES=`locate wheatgrass-theme.el | sort | grep emacs/25 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
+THEMES=`locate wheatgrass-theme.el | sort | grep emacs/24 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
 curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/donkey-theme.el' > ${THEMES}donkey-theme.el
 
 
