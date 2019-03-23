@@ -17,7 +17,7 @@ echo debconf debconf/frontend select Noninteractive | debconf-set-selections
 apt-get ${APTOPT} install \
 	build-essential \
 	cmake \
-	emacs24-nox \
+	emacs-nox \
 	git \
 	htop \
 	less \
