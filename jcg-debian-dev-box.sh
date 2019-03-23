@@ -34,8 +34,6 @@ updatedb
 
 pip3 install setuptools && pip3 install ipython
 
-curl https://sh.rustup.rs -sSf | sh
-
 curl -s 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
 
 THEMES=`locate wheatgrass-theme.el | sort | grep emacs/2 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
