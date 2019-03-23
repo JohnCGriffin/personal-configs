@@ -34,7 +34,7 @@ updatedb
 
 curl -s 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
 
-THEMES=`locate wheatgrass-theme.el | sort | grep emacs/24 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
+THEMES=`locate wheatgrass-theme.el | sort | grep emacs/2 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
 curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/donkey-theme.el' > ${THEMES}donkey-theme.el
 
 
