@@ -32,7 +32,7 @@ apt-get ${APTOPT} install \
 
 updatedb
 
-pip3 install setuptools && pip3 install ipython mypy
+pip3 install setuptools && pip3 install ipython mypy XlsxWriter
 
 curl -s 'https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
 
