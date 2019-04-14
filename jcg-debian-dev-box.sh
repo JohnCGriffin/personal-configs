@@ -54,4 +54,9 @@ echo '
 export PATH=$PATH:/usr/local/go/bin
 ' >> /etc/profile.d/path.sh
 
+echo '
+export EDITOR=emacs
+' >> /etc/skel/.profile
+
+
 updatedb
