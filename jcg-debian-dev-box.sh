@@ -56,6 +56,7 @@ export PATH=$PATH:/usr/local/go/bin
 
 echo '
 export EDITOR=emacs
+export PATH=$PATH:/usr/local/go/bin
 ' >> /etc/skel/.profile
 
 
