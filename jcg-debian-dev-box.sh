@@ -42,8 +42,10 @@ curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/
 
 mkdir -p /etc/skel/.vim/colors/
 curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/moody.vim' > /etc/skel/.vim/colors/moody.vim
-curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/dot-emacs.el' > /etc/skel/.emacs
+
 curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/dot-vimrc' > /etc/skel/.vimrc
+
+git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
 # change PS1
 sed -i -e 's/;34m/;37m/' /etc/skel/.bashrc
