@@ -26,10 +26,6 @@ RUN apt-get -qq -y install \
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
-COPY moody.vim /etc/skel/.vim/colors/ 
-
-COPY dot-vimrc /etc/skel/.vimrc
-
 RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
 RUN sed -i -e "s/;34m/;37m/" /etc/skel/.bashrc
