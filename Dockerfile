@@ -34,6 +34,10 @@ COPY ps1.sh /tmp
 
 RUN sh /tmp/ps1.sh
 
+COPY sshd_config.to_append.txt /tmp
+
+RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && cp /tmp/ssh_config /etc/ssh
+
 RUN yes | adduser griffin > /dev/null 2>&1
 
 USER griffin
