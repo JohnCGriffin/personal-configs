@@ -6,7 +6,7 @@ MAINTAINER griffinish@gmail.com
 WORKDIR /root
 
 ENV DEBIAN_FRONTEND=noninteractive
-ENV TERM=xterm
+ENV TERM=xterm-256color
 
 
 RUN apt-get clean
