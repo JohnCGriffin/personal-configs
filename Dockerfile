@@ -16,6 +16,7 @@ RUN apt-get -qq install --no-install-recommends -y apt-utils 2> /dev/null < /dev
 RUN apt-get -qq install nodejs npm sudo  -y apt-utils 2> /dev/null < /dev/null
 RUN apt-get -qq -y install \
 	build-essential cmake git \
+	rustc \
 	emacs-nox vim \
 	less \
 	locate \
@@ -24,11 +25,14 @@ RUN apt-get -qq -y install \
 	wget curl
 
 
+
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
 RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
 RUN sed -i -e "s/;34m/;37m/" /etc/skel/.bashrc
+
+RUN echo "export PATH=~/.cargo/bin:$PATH" >> /etc/skel/.bashrc
 
 COPY ps1.sh /tmp
 
