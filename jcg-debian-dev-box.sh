@@ -32,8 +32,6 @@ apt-get ${APTOPT} install \
 
 pip3 install setuptools && pip3 install ipython mypy XlsxWriter
 
-curl -s 'https://dl.google.com/go/go1.12.4.linux-amd64.tar.gz' | tar -C /usr/local -xzf -
-
 THEMES=`locate wheatgrass-theme.el | sort | grep emacs/2 | tail -1 | sed -e 's/wheatgrass-theme.el//'`
 curl -s 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/donkey-theme.el' > ${THEMES}donkey-theme.el
 
@@ -48,14 +46,9 @@ git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 # change PS1
 sed -i -e 's/;34m/;37m/' /etc/skel/.bashrc
 
-echo '
-export PATH=$PATH:/usr/local/go/bin
-' >> /etc/profile.d/path.sh
-
 cat << __EOS__ >> /etc/skel/.profile
 export PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 export EDITOR=emacs
-export PATH=$PATH:/usr/local/go/bin
 __EOS__
 
 
