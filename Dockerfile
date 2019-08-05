@@ -1,32 +1,45 @@
 
-FROM debian:buster
+FROM amazonlinux
 
 MAINTAINER griffinish@gmail.com
 
 WORKDIR /root
 
-ENV DEBIAN_FRONTEND=noninteractive
+#ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
 
-RUN apt-get clean
-RUN apt-get -qq update 
-RUN apt-get upgrade -y 2> /dev/null < /dev/null
-RUN apt-get -qq install --no-install-recommends -y apt-utils 2> /dev/null < /dev/null
-RUN apt-get -qq install nodejs npm sudo  -y apt-utils 2> /dev/null < /dev/null
-RUN apt-get -qq -y install \
-	build-essential cmake git \
-	rustc \
-	emacs-nox vim \
-	less \
-	locate \
-	man \
-	python3 python3-pip ipython3 \
-	wget curl
+#RUN yum clean
+RUN yum -q -y update 
 
+RUN amazon-linux-extras install -y epel 
+RUN amazon-linux-extras install -y rust1
 
+RUN yum install -q -y gcc-c++ make git
+
+RUN yum install -q -y emacs-nox 
+
+RUN yum install -q -y locate man
+
+RUN yum install -q -y python3 python3-pip
+
+RUN yum install -q -y wget 
+
+RUN yum install -q -y sudo
+
+RUN yum install -q -y mlocate
+
+RUN yum install -q -y openldap-devel
+
+RUN yum install -q -y man-pages
+
+RUN yum install -q -y yum-utils
+
+RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
+
+RUN echo hiasdf
 
 RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
@@ -43,6 +56,8 @@ COPY sshd_config.to_append.txt /tmp
 RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && cp /tmp/ssh_config /etc/ssh
 
 RUN yes | adduser griffin > /dev/null 2>&1
+
+RUN updatedb
 
 USER griffin
 
