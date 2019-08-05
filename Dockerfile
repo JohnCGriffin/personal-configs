@@ -39,6 +39,8 @@ RUN yum install -q -y bind-utils
 
 RUN yum install -q -y telnet
 
+RUN yum install -q -y tar
+
 RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
