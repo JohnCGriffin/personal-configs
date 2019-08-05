@@ -13,8 +13,8 @@ and read-only access to SSH credentials.
 #!/bin/bash
 
 exec docker run --rm -it  -v `pwd`:/WORK \
-	-v`echo ~`/.ssh:/home/griffin/.ssh:ro \
-	-v`echo ~`/.aws:/home/griffin/.aws:ro \
+	-v `echo ~`/.ssh:/home/griffin/.ssh:ro \
+	-v `echo ~`/.aws:/home/griffin/.aws:ro \
 	griffinish-amazonlinux
 
 ```
