@@ -39,7 +39,9 @@ RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
-RUN echo hiasdf
+RUN pip3 install ipython
+
+RUN pip3 install awscli
 
 RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
