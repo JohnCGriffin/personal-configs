@@ -12,16 +12,19 @@ ENV TERM=xterm-256color
 #RUN yum clean
 RUN yum -q -y update 
 
-RUN amazon-linux-extras install -y epel 
+RUN amazon-linux-extras install -y epel
+
 RUN amazon-linux-extras install -y rust1
 
-RUN yum install -q -y gcc-c++ make git
+RUN yum install -q -y gcc-c++ make git 
+
+RUN yum install -q -y gdb
 
 RUN yum install -q -y emacs-nox 
 
 RUN yum install -q -y locate man
 
-RUN yum install -q -y python3 python3-pip
+RUN yum install -q -y python3 python3-devel python3-pip
 
 RUN yum install -q -y wget 
 
@@ -45,9 +48,11 @@ RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
+RUN pip3 install awscli
+
 RUN pip3 install ipython
 
-RUN pip3 install awscli
+RUN pip3 install python-language-server
 
 RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
 
@@ -66,6 +71,8 @@ RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && 
 RUN yes | adduser griffin > /dev/null 2>&1
 
 RUN updatedb
+
+RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
 
 USER griffin
 
