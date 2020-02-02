@@ -20,6 +20,8 @@ RUN yum install -q -y gcc-c++ make git
 
 RUN yum install -q -y gdb
 
+RUN yum install -q -y clang-devel clang-tools-extra
+
 RUN yum install -q -y emacs-nox 
 
 RUN yum install -q -y locate man
@@ -44,6 +46,8 @@ RUN yum install -q -y telnet
 
 RUN yum install -q -y tar
 
+RUN amazon-linux-extras install golang1.11
+
 RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
@@ -60,6 +64,8 @@ RUN sed -i -e "s/;34m/;37m/" /etc/skel/.bashrc
 
 RUN echo "export PATH=~/.cargo/bin:$PATH" >> /etc/skel/.bashrc
 
+RUN echo "export PATH=~/go/bin:$PATH" >> /etc/skel/.bashrc
+
 COPY ps1.sh /tmp
 
 RUN sh /tmp/ps1.sh
@@ -70,9 +76,11 @@ RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && 
 
 RUN yes | adduser griffin > /dev/null 2>&1
 
-RUN updatedb
+RUN su - griffin -c "go get golang.org/x/tools/gopls"
 
 RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
+
+RUN updatedb
 
 USER griffin
 
