@@ -46,19 +46,15 @@ RUN yum install -q -y telnet
 
 RUN yum install -q -y tar
 
+RUN yum install -q -y patchelf
+
 RUN amazon-linux-extras install golang1.11
 
 RUN rm -f /etc/skel/.emacs
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
-RUN pip3 install awscli
-
-RUN pip3 install ipython
-
-RUN pip3 install python-language-server
-
-RUN git clone https://github.com/JohnCGriffin/dot-emacs-dot-d.git /etc/skel/.emacs.d
+COPY init.el /etc/skel/.emacs.d/init.el
 
 RUN sed -i -e "s/;34m/;37m/" /etc/skel/.bashrc
 
@@ -76,13 +72,21 @@ RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && 
 
 RUN yes | adduser griffin > /dev/null 2>&1
 
-RUN su - griffin -c "go get golang.org/x/tools/gopls"
+#RUN su - griffin -c "go get golang.org/x/tools/gopls"
 
 RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
 
 RUN updatedb
 
 USER griffin
+
+RUN pip3 install --user awscli
+
+RUN pip3 install --user ipython
+
+RUN pip3 install --user nuitka
+
+#RUN pip3 install python-language-server
 
 WORKDIR /WORK
 
