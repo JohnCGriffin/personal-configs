@@ -48,6 +48,11 @@ RUN yum install -q -y tar
 
 RUN yum install -q -y patchelf
 
+RUN yum install -q -y time
+
+RUN yum install -q -y file
+
+
 RUN amazon-linux-extras install golang1.11
 
 RUN rm -f /etc/skel/.emacs
