@@ -52,7 +52,6 @@ RUN yum install -q -y time
 
 RUN yum install -q -y file
 
-
 RUN amazon-linux-extras install golang1.11
 
 RUN rm -f /etc/skel/.emacs
@@ -77,8 +76,6 @@ RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && 
 
 RUN yes | adduser griffin > /dev/null 2>&1
 
-#RUN su - griffin -c "go get golang.org/x/tools/gopls"
-
 RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
 
 RUN updatedb
@@ -91,8 +88,21 @@ RUN pip3 install --user ipython
 
 RUN pip3 install --user nuitka
 
+RUN mkdir /tmp/turd
+
+WORKDIR /tmp/turd
+
+RUN go mod init turd
+
+RUN go get golang.org/x/tools/gopls@latest
+
+RUN rm -rf /tmp/turd
+
+RUN sudo ln -s ~/go/bin/gopls /usr/local/bin
+
 #RUN pip3 install python-language-server
 
 WORKDIR /WORK
 
-CMD [ "/bin/bash", "-l" ]
+CMD [ "/bin/bash", "-l", "--" ]
+

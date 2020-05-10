@@ -20,30 +20,21 @@
   (unless (version<= emacs-version "25.3") ; as in Centos 7
     (conditional-install magit)
     (conditional-install markdown-mode))
-  ;(conditional-install lsp-mode)
+  (conditional-install lsp-mode)
   (conditional-install go-mode)
   (conditional-install rust-mode)
   (conditional-install dockerfile-mode)
   ;(conditional-install lsp-python-ms)
   (conditional-install company))
 
-;(progn
-;
-;  (add-hook 'go-mode-hook 'lsp)
-;
-;  (add-hook 'rust-mode-hook 'lsp)
-;
-;  (add-hook 'python-mode-hook
-;	    (lambda ()
-;	      (require 'lsp-python-ms)
-;	      (lsp)))
-;
-;  (add-hook 'c++-mode-hook 
-;	(lambda ()
-;		(setq lsp-enable-on-type-formatting nil)
-;		(lsp-mode)))
-;
-;  (add-hook 'c-mode-hook 'lsp))
+(defun lsp-go-install-save-hooks ()
+  (add-hook 'before-save-hook #'lsp-format-buffer t t)
+  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+
+(progn
+
+  (add-hook 'go-mode-hook 'lsp)
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
 
 ;; Basics
