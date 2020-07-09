@@ -72,7 +72,8 @@ RUN sh /tmp/ps1.sh
 
 COPY sshd_config.to_append.txt /tmp
 
-RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && cp /tmp/ssh_config /etc/ssh
+RUN cat /etc/ssh/ssh_config /tmp/sshd_config.to_append.txt > /tmp/ssh_config && \
+	cp /tmp/ssh_config /etc/ssh
 
 RUN yes | adduser griffin > /dev/null 2>&1
 
@@ -107,6 +108,12 @@ RUN rm -rf /tmp/turd
 RUN sudo ln -s ~/go/bin/gopls /usr/local/bin
 
 RUN pip3 install --user python-language-server
+
+RUN curl -o ~/.local/bin/lein \
+	https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+	chmod a+x ~/.local/bin/lein && \
+	~/.local/bin/lein
+
 
 WORKDIR /WORK
 

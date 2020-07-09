@@ -20,6 +20,8 @@
   (unless (version<= emacs-version "25.3") ; as in Centos 7
     (conditional-install magit)
     (conditional-install markdown-mode))
+  (conditional-install clojure-mode)
+  (conditional-install cider)
   (conditional-install lsp-mode)
   (conditional-install go-mode)
   (conditional-install rust-mode)
