@@ -52,6 +52,8 @@ RUN yum install -q -y file
 
 RUN yum install -q -y glibc-static
 
+RUN yum install -q -y java-11-amazon-corretto-headless
+
 RUN amazon-linux-extras install golang1.11
 
 RUN rm -f /etc/skel/.emacs
@@ -104,7 +106,7 @@ RUN rm -rf /tmp/turd
 
 RUN sudo ln -s ~/go/bin/gopls /usr/local/bin
 
-#RUN pip3 install python-language-server
+RUN pip3 install --user python-language-server
 
 WORKDIR /WORK
 
