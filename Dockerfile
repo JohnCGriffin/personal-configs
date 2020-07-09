@@ -14,8 +14,6 @@ RUN yum -q -y update
 
 RUN amazon-linux-extras install -y epel
 
-RUN amazon-linux-extras install -y rust1
-
 RUN yum install -q -y gcc-c++ make git 
 
 RUN yum install -q -y gdb
@@ -52,6 +50,8 @@ RUN yum install -q -y time
 
 RUN yum install -q -y file
 
+RUN yum install -q -y glibc-static
+
 RUN amazon-linux-extras install golang1.11
 
 RUN rm -f /etc/skel/.emacs
@@ -62,9 +62,7 @@ COPY init.el /etc/skel/.emacs.d/init.el
 
 RUN sed -i -e "s/;34m/;37m/" /etc/skel/.bashrc
 
-RUN echo "export PATH=~/.cargo/bin:$PATH" >> /etc/skel/.bashrc
-
-RUN echo "export PATH=~/go/bin:$PATH" >> /etc/skel/.bashrc
+RUN echo "export PATH=~/.cargo/bin:~/go/bin:$PATH" >> /etc/skel/.bashrc
 
 COPY ps1.sh /tmp
 
@@ -81,6 +79,12 @@ RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
 RUN updatedb
 
 USER griffin
+
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs > /tmp/rustup.sh
+
+RUN sh /tmp/rustup.sh -y
+
+RUN ~/.cargo/bin/rustup component add rls rust-analysis rust-src
 
 RUN pip3 install --user awscli
 
