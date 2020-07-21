@@ -109,6 +109,8 @@ RUN sudo ln -s ~/go/bin/gopls /usr/local/bin
 
 RUN pip3 install --user python-language-server
 
+RUN pip3 install --user boto3
+
 RUN curl -o ~/.local/bin/lein \
 	https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
 	chmod a+x ~/.local/bin/lein && \
