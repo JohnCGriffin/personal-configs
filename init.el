@@ -22,21 +22,21 @@
     (conditional-install markdown-mode))
   (conditional-install clojure-mode)
   (conditional-install cider)
-  (conditional-install lsp-mode)
+  ;(conditional-install lsp-mode)
   (conditional-install go-mode)
   (conditional-install rust-mode)
   (conditional-install dockerfile-mode)
   ;(conditional-install lsp-python-ms)
   (conditional-install company))
 
-(defun lsp-go-install-save-hooks ()
-  (add-hook 'before-save-hook #'lsp-format-buffer t t)
-  (add-hook 'before-save-hook #'lsp-organize-imports t t))
+;; (defun lsp-go-install-save-hooks ()
+;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
+;;   (add-hook 'before-save-hook #'lsp-organize-imports t t))
 
-(progn
+;; (progn
 
-  (add-hook 'go-mode-hook 'lsp)
-  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
+;;   (add-hook 'go-mode-hook 'lsp)
+;;   (add-hook 'go-mode-hook #'lsp-go-install-save-hooks))
 
 
 ;; Basics
