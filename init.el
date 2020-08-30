@@ -31,7 +31,11 @@
   (conditional-install company))
 
 (progn
-  (add-hook 'c++-mode-hook (lambda () (flycheck-mode))))
+  (add-hook 'c++-mode-hook
+	    (lambda ()
+	      (setq flycheck-gcc-language-standard "c++17")
+	      (setq flycheck-clang-language-standard "c++17")
+	      (flycheck-mode))))
 
 ;; (defun lsp-go-install-save-hooks ()
 ;;   (add-hook 'before-save-hook #'lsp-format-buffer t t)
