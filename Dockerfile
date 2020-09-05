@@ -8,23 +8,30 @@ WORKDIR /root
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=xterm-256color
 
+RUN echo 2020-09-05
 
 RUN apt-get clean
-RUN apt-get -qq update 
-RUN apt-get upgrade -y 2> /dev/null < /dev/null
-RUN apt-get -qq install --no-install-recommends -y apt-utils 2> /dev/null < /dev/null
-RUN apt-get -qq install -y nodejs npm sudo apt-utils 2> /dev/null < /dev/null
-RUN apt-get -qq -y install \
-	build-essential cmake git \
-	rustc \
-	emacs-nox vim \
-	less \
-	locate \
-	man \
-	python3 python3-pip ipython3 \
-	wget curl
-RUN apt-get -qq -y install clang
+RUN apt-get update 
+RUN apt-get upgrade -y 
+RUN apt-get install --no-install-recommends -y apt-utils 2> /dev/null
+RUN apt-get install --no-install-recommends -y nodejs npm sudo apt-utils 
 
+RUN apt-get install --no-install-recommends -y build-essential
+RUN apt-get install --no-install-recommends -y cmake
+RUN apt-get install --no-install-recommends -y git
+RUN apt-get install --no-install-recommends -y rustc
+RUN apt-get install --no-install-recommends -y emacs-nox
+RUN apt-get install --no-install-recommends -y vim
+RUN apt-get install --no-install-recommends -y less
+RUN apt-get install --no-install-recommends -y locate
+RUN apt-get install --no-install-recommends -y man
+RUN apt-get install --no-install-recommends -y python3-nox
+RUN apt-get install --no-install-recommends -y python3-pip
+RUN apt-get install --no-install-recommends -y wget
+RUN apt-get install --no-install-recommends -y curl
+RUN apt-get install --no-install-recommends -y clang
+RUN apt-get install --no-install-recommends -y awscli
+RUN apt-get install --no-install-recommends -y ssh-client
 
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
@@ -48,6 +55,9 @@ RUN yes | adduser griffin > /dev/null 2>&1
 RUN su - griffin -c "emacs --script ~griffin/.emacs.d/init.el"
 
 USER griffin
+
+RUN pip3 install --user --no-warn-script-location ipython
+RUN pip3 install --user boto3
 
 WORKDIR /WORK
 
