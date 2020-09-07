@@ -25,7 +25,7 @@
   ;(conditional-install lsp-mode)
   (conditional-install go-mode)
   (conditional-install flycheck)
-  (conditional-install rust-mode)
+  ;(conditional-install rust-mode)
   (conditional-install dockerfile-mode)
   ;(conditional-install lsp-python-ms)
   (conditional-install company))

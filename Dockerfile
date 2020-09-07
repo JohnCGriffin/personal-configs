@@ -19,7 +19,6 @@ RUN apt-get install --no-install-recommends -y nodejs npm sudo apt-utils
 RUN apt-get install --no-install-recommends -y build-essential
 RUN apt-get install --no-install-recommends -y cmake
 RUN apt-get install --no-install-recommends -y git
-RUN apt-get install --no-install-recommends -y rustc
 RUN apt-get install --no-install-recommends -y emacs-nox
 RUN apt-get install --no-install-recommends -y vim
 RUN apt-get install --no-install-recommends -y less
