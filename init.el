@@ -23,6 +23,7 @@
   ;(conditional-install clojure-mode)
   ;(conditional-install cider)
   ;(conditional-install lsp-mode)
+  (conditional-install yaml-mode)
   (conditional-install go-mode)
   (conditional-install flycheck)
   ;(conditional-install rust-mode)

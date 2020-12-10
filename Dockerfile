@@ -29,8 +29,13 @@ RUN apt-get install --no-install-recommends -y python3-pip
 RUN apt-get install --no-install-recommends -y wget
 RUN apt-get install --no-install-recommends -y curl
 RUN apt-get install --no-install-recommends -y clang
-RUN apt-get install --no-install-recommends -y awscli
 RUN apt-get install --no-install-recommends -y ssh-client
+RUN apt-get install --no-install-recommends -y unzip
+
+RUN curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64-2.0.30.zip -o awscliv2.zip
+RUN unzip awscliv2.zip
+RUN sudo ./aws/install
+RUN rm -rf aws awscliv2.zip
 
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
