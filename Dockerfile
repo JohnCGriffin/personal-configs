@@ -63,6 +63,9 @@ USER griffin
 RUN pip3 install --user --no-warn-script-location ipython
 RUN pip3 install --user boto3
 
+# ipython unscrew: https://github.com/ipython/ipython/issues/12740
+RUN pip3 install --user jedi==0.17.2
+
 WORKDIR /WORK
 
 CMD [ "/bin/bash", "-l" ]
