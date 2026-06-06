@@ -1,31 +1,50 @@
 
-FROM ubuntu
 
-MAINTAINER griffinish@gmail.com
+FROM debian:latest
 
 WORKDIR /root
 
-ENV DEBIAN_FRONTEND=noninteractive
 ENV TERM=linux
 
+RUN apt -y update
+RUN apt -y install sudo
+RUN apt install -y racket 
+RUN apt install -y g++ 
+RUN apt install -y gdb 
+RUN apt install -y emacs-nox
+RUN apt install -y clangd
+RUN apt install -y cmake
+RUN apt install -y neovim
+RUN apt install -y time
+RUN apt install -y ssh
+RUN apt install -y git
+RUN apt install -y build-essential
+RUN apt install -y curl
+RUN apt install -y wget
+RUN apt install -y tmux
+RUN apt install -y python3
+RUN apt install -y man
+RUN apt install -y less
 
-RUN apt-get clean
-RUN apt-get -qq update 
-RUN apt-get upgrade -y 2> /dev/null < /dev/null
-RUN apt-get -qq install --no-install-recommends -y apt-utils 2> /dev/null < /dev/null
-RUN apt-get -qq install nodejs npm sudo  -y apt-utils 2> /dev/null < /dev/null
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
-
-
-RUN apt-get -qq install -y wget
-
-RUN wget --no-cache -q 'https://raw.githubusercontent.com/JohnCGriffin/personal-configs/master/jcg-debian-dev-box.sh'
-
-RUN sh jcg-debian-dev-box.sh
 
 RUN yes | adduser griffin > /dev/null 2>&1
 
+COPY setup-emacs.el /home/griffin/setup-emacs.el
+
+RUN mkdir -p /home/griffin/.emacs.d
+
+COPY init.el /home/griffin/.emacs.d/
+COPY tm-shell-script /home/griffin/
+
+RUN chown -R griffin /home/griffin
+
 USER griffin
+ENV HOME=/home/griffin
+RUN raco pkg install --auto racket-langserver
+
+RUN emacs --batch -l /home/griffin/setup-emacs.el 
+
 
 WORKDIR /WORK
 
