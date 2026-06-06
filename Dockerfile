@@ -30,6 +30,15 @@ RUN apt install -y gopls
 RUN apt install -y libvterm-dev
 RUN apt install -y python3-pip 
 RUN apt install -y python3-venv 
+RUN apt install -y man-db
+RUN apt install -y groff
+
+RUN apt-get update && apt-get install -y locales \
+ && sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
+ && locale-gen
+
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
