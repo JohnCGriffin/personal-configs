@@ -28,6 +28,8 @@ RUN apt install -y less
 RUN apt install -y golang
 RUN apt install -y gopls
 RUN apt install -y libvterm-dev
+RUN apt install -y python3-pip 
+RUN apt install -y python3-venv 
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
