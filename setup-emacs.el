@@ -12,3 +12,4 @@
 (package-install 'tuareg)
 (package-install 'company)
 (package-install 'rust-mode)
+(package-install 'go-mode)

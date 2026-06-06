@@ -25,6 +25,8 @@ RUN apt install -y tmux
 RUN apt install -y python3
 RUN apt install -y man
 RUN apt install -y less
+RUN apt install -y golang
+RUN apt install -y gopls
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
@@ -34,6 +36,8 @@ COPY setup-emacs.el /home/griffin/setup-emacs.el
 
 RUN mkdir -p /home/griffin/.emacs.d
 
+RUN echo export LANG=en_US.UTF-8 >> /home/griffin/.bashrc
+
 COPY init.el /home/griffin/.emacs.d/
 COPY tm-shell-script /home/griffin/
 
@@ -41,6 +45,8 @@ RUN chown -R griffin /home/griffin
 
 USER griffin
 ENV HOME=/home/griffin
+
+
 RUN raco pkg install --auto racket-langserver
 
 RUN emacs --batch -l /home/griffin/setup-emacs.el 
