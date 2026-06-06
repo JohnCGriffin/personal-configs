@@ -13,3 +13,4 @@
 (package-install 'company)
 (package-install 'rust-mode)
 (package-install 'go-mode)
+(package-install 'vterm)

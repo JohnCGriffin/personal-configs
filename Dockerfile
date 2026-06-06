@@ -27,6 +27,7 @@ RUN apt install -y man
 RUN apt install -y less
 RUN apt install -y golang
 RUN apt install -y gopls
+RUN apt install -y libvterm-dev
 
 RUN echo 'griffin ALL=(root)NOPASSWD: ALL' > /etc/sudoers.d/griffin
 
