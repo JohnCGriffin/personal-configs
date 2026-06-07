@@ -32,6 +32,9 @@ RUN apt install -y python3-pip
 RUN apt install -y python3-venv 
 RUN apt install -y man-db
 RUN apt install -y groff
+RUN apt install -y locate
+RUN apt install -y libncurses-dev
+
 
 RUN apt-get update && apt-get install -y locales \
  && sed -i 's/^# *en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen \
@@ -48,15 +51,20 @@ COPY setup-emacs.el /home/griffin/setup-emacs.el
 
 RUN mkdir -p /home/griffin/.emacs.d
 RUN mkdir -p /home/griffin/.config/clangd
+RUN mkdir -p /home/griffin/bin
 
 COPY config.yaml /home/griffin/.config/clangd/
 
 RUN echo export LANG=en_US.UTF-8 >> /home/griffin/.bashrc
+RUN echo export PATH=~/bin:$PATH >> /home/griffin/.bashrc
 
 COPY init.el /home/griffin/.emacs.d/
-COPY tm-shell-script /home/griffin/
+COPY tm-shell-script /home/griffin/bin/tm
+RUN chmod a+x /home/griffin/bin/tm
 
 RUN chown -R griffin /home/griffin
+
+RUN updatedb
 
 USER griffin
 ENV HOME=/home/griffin
