@@ -20,7 +20,7 @@
 (setq use-package-always-ensure t)
 (setq use-package-verbose t)
 
-;(prefer-coding-system 'utf-8-unix)
+					;(prefer-coding-system 'utf-8-unix)
 (setq-default buffer-file-coding-system 'utf-8-unix)
 
 
@@ -78,9 +78,12 @@
 	  ))
 
   (dolist (sym eglot-hooks)
-    ;(add-hook 'before-save-hook #'eglot-format-buffer)
+					;(add-hook 'before-save-hook #'eglot-format-buffer)
     (add-hook sym 'eglot-ensure)
-    (add-hook sym 'company-mode))
+    (add-hook sym 'company-mode)
+    (add-hook 'c++-mode-hook
+              (lambda ()
+		(add-hook 'before-save-hook #'eglot-format-buffer nil t))))
 
   (add-hook 'eglot-managed-mode-hook
 	    (lambda () (eglot-inlay-hints-mode -1))))

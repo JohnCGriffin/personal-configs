@@ -35,6 +35,7 @@ RUN apt install -y groff
 RUN apt install -y locate
 RUN apt install -y libncurses-dev
 RUN apt install -y clang-format
+RUN apt install -y file
 
 
 RUN apt-get update && apt-get install -y locales \
