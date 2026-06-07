@@ -47,6 +47,9 @@ RUN yes | adduser griffin > /dev/null 2>&1
 COPY setup-emacs.el /home/griffin/setup-emacs.el
 
 RUN mkdir -p /home/griffin/.emacs.d
+RUN mkdir -p /home/griffin/.config/clangd
+
+COPY config.yaml /home/griffin/.config/clangd/
 
 RUN echo export LANG=en_US.UTF-8 >> /home/griffin/.bashrc
 
