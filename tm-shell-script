@@ -7,6 +7,6 @@ tmux attach || (
 	tmux kill-pane -t 0 && \
 	tmux set -g status off && \
 	tmux split-window -h -p 40 && \
-	tmux split-window && \
+	tmux split-window -p 25 && \
 	tmux select-pane -t 0 && \
 	tmux attach)
