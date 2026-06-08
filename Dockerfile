@@ -59,6 +59,7 @@ COPY config.yaml /home/griffin/.config/clangd/
 
 RUN echo export LANG=en_US.UTF-8 >> /home/griffin/.bashrc
 RUN echo export PATH=~/bin:$PATH >> /home/griffin/.bashrc
+RUN echo export TZ=America/New_York >> /home/griffin/.bashrc
 
 COPY init.el /home/griffin/.emacs.d/
 COPY tm-shell-script /home/griffin/bin/tm
