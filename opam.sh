@@ -12,3 +12,9 @@ opam install -y curses
 opam install -y ocamlformat
 opam install -y ocaml-lsp-server
 
+opam install -y alcotest 
+opam install -y qcheck
+opam install -y qcheck-alcotest
+opam install -y uutf
+opam install -y utop
+
