@@ -37,6 +37,7 @@ RUN apt install -y libncurses-dev
 RUN apt install -y clang-format
 RUN apt install -y file
 RUN apt install -y bear
+RUN apt install -y opam
 
 
 RUN apt-get update && apt-get install -y locales \
@@ -73,10 +74,15 @@ RUN updatedb
 USER griffin
 ENV HOME=/home/griffin
 
-
 RUN raco pkg install --auto racket-langserver
 
 RUN emacs --batch -l /home/griffin/setup-emacs.el 
+
+
+RUN opam init -y --disable-sandboxing
+
+COPY opam.sh /tmp/
+RUN sh /tmp/opam.sh
 
 
 WORKDIR /WORK

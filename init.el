@@ -1,14 +1,13 @@
 
+;; (progn ;for vterm installation
+;; (require 'package)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+;; (package-initialize))
 
-;(progn ;for vterm installation
- ;(require 'package)
- ;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
- ;(package-initialize))
-
-;(add-to-list 'load-path "~/.opam/default/share/emacs/site-lisp")
-;(add-to-list 'load-path "/Users/griffin/.opam/ocaml-base-compiler.5.4.1/share/emacs/site-lisp")
-;(require 'ocp-indent)
-;(add-hook 'tuareg-mode-hook #'ocp-indent-caml-mode-setup)
+;; (add-to-list 'load-path "~/.opam/default/share/emacs/site-lisp")
+;; (add-to-list 'load-path "/Users/griffin/.opam/ocaml-base-compiler.5.4.1/share/emacs/site-lisp")
+;; (require 'ocp-indent)
+;; (add-hook 'tuareg-mode-hook #'ocp-indent-caml-mode-setup)
 
 ;; Show full backtraces during init
 (setq debug-on-error t)
@@ -78,12 +77,9 @@
 	  ))
 
   (dolist (sym eglot-hooks)
-					;(add-hook 'before-save-hook #'eglot-format-buffer)
+    (add-hook 'before-save-hook #'eglot-format-buffer)
     (add-hook sym 'eglot-ensure)
-    (add-hook sym 'company-mode)
-    (add-hook 'c++-mode-hook
-              (lambda ()
-		(add-hook 'before-save-hook #'eglot-format-buffer nil t))))
+    (add-hook sym 'company-mode))
 
   (add-hook 'eglot-managed-mode-hook
 	    (lambda () (eglot-inlay-hints-mode -1))))
