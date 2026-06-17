@@ -4,7 +4,7 @@ FROM debian:latest
 
 WORKDIR /root
 
-ENV TERM=linux
+ENV TERM=xterm-256color
 
 RUN apt -y update
 RUN apt -y install sudo
