@@ -21,6 +21,7 @@
 
 					;(prefer-coding-system 'utf-8-unix)
 (setq-default buffer-file-coding-system 'utf-8-unix)
+(global-display-line-numbers-mode 1)
 
 
 					; general editing
